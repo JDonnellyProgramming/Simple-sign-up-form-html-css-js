@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Form</title>
+  <style>
+    h2 {
+      text-align: center;
+    }
+    form {
+      width: 300px;
+      margin: 0 auto;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input[type="submit"] {
+      display: block;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Registration Form</h2>
+  <form id="registrationForm" onsubmit="validateForm(event)">
+  <label for="username">Username:</label>
+  <input type="text" id="username" name="username" required>
+  <span id="usernameError"></span>
+
+
+  <label for="password">Password:</label>
+  <input type="text" id="password" name="password" required>
+  <span id="passwordError" type="passwordError"></span>
+
+
+  <input type="submit" value="Register">
+</form>
+  <script>
+        const takenUsernames = ['steve', 'Gareth', 'Henry', 'ian'];
+
+
+        function validateForm(event) {
+          event.preventDefault(); // prevent form submission
+
+
+          const usernameInput = document.getElementById('username');
+          const passwordInput = document.getElementById('password');
+          const usernameError = document.getElementById('usernameError');
+          const passwordError = document.getElementById('passwordError');
+
+
+          const username = usernameInput.value.trim();
+
+
+          if (username === '') {
+            usernameError.textContent = 'Username is required';
+            return;
+          }
+          if (takenUsernames.includes(username)) {
+            usernameError.textContent = 'Username is already taken';
+            usernameInput.value = '';
+            return;
+          }
+          usernameError.textContent = '';
+
+
+          const password = passwordInput.value.trim();
+          if (password === '') {
+            passwordError.textContent = 'Password is required';
+            return;
+          }
+          if (password.length < 6) {
+            passwordError.textContent = 'Password should be at least 6 characters';
+            passwordInput.value = '';
+            return;
+          }
+          passwordError.textContent = '';
+        }
+       
+  </script>
+</body>
+</html>
